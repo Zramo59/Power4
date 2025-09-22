@@ -4,19 +4,19 @@ import "fmt"
 
 type Power struct {
 	Table   [6][7]string
-	player1 map[string]int
-	player2 map[string]int
+	player1 map[string][2]int
+	player2 map[string][2]int
 }
 
-func (p *Power) PlayerAffect() {
-	fmt.Println("Que voulez-vous comme symbole pour le joueur 1 ? (\"X/O\")")
-	input := ""
-	fmt.Scanln(&input)
-	if input == "X" {
-		p.player1["X"] = 1
-		p.player2["O"] = 2
-	}
-}
+// func (p *Power) PlayerAffect() {
+// 	fmt.Println("Que voulez-vous comme symbole pour le joueur 1 ? (\"X/O\")")
+// 	input := ""
+// 	fmt.Scanln(&input)
+// 	if input == "X" {
+// 		p.player1["X"] = []int{}
+// 		p.player2["O"] = []int{}
+// 	}
+// }
 
 // NewPower returns a Power struct with the Table initialized to empty spaces.
 func NewPower() *Power {
@@ -29,6 +29,18 @@ func NewPower() *Power {
 	}
 	return p
 }
+
+func (p *Power) Game() {
+	// Game logic will be implemented here
+	if len(p.player1) == 0 {
+		fmt.Println("C'est au joueur 1 de jouer")
+	} else {
+		fmt.Println("C'est au joueur 2 de jouer")
+	}
+	// Continuez avec la logique du jeu
+	// Par exemple, vous pouvez demander au joueur de choisir une colonne et de placer son jeton
+}
+
 func (p *Power) Win() {
 	// Logic to check for a win will be implemented here
 	for i := 0; i < 6; i++ {
@@ -59,15 +71,4 @@ func (p *Power) Win() {
 			}
 		}
 	}
-}
-
-func (p *Power) Game() {
-	// Game logic will be implemented here
-	if len(p.player1) == 0 {
-		fmt.Println("C'est au joueur 1 de jouer")
-	} else {
-		fmt.Println("C'est au joueur 2 de jouer")
-	}
-	// Continuez avec la logique du jeu
-	// Par exemple, vous pouvez demander au joueur de choisir une colonne et de placer son jeton
 }
