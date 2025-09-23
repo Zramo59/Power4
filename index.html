@@ -1,4 +1,6 @@
+{{define "index.html"}}
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +15,17 @@
     <main>
         <section>
             <h2>{{.grille}}</h2>
-            <p>Je suis un développeur web passionné par la création de sites web.</p>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2023 Mon Site Web</p>
-    </footer>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        table { border-collapse: collapse; margin: 10px 0; }
+        td { width: 40px; height: 40px; border: 1px solid #ccc; text-align: center; vertical-align: middle; }
+        .p1 { background: #e74c3c; }
+        .p2 { background: #f1c40f; }
+        .controls button { width: 40px; }
+        .msg { color: #a25; min-height: 1.2em; }
+    </style>
 </body>
 </html>
+{{end}}
