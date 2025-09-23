@@ -4,21 +4,33 @@ import "fmt"
 
 type Power struct {
 	Table   [6][7]string
-	player1 map[string][2]int
-	// player2 map[string][2]int
+	player1 string
+	player2 string
 }
 
-var table [6][7]string
+var player1 = "X"
+var player2 = "O"
 
-// func (p *Power) PlayerAffect() {
-// 	fmt.Println("Que voulez-vous comme symbole pour le joueur 1 ? (\"X/O\")")
-// 	input := ""
-// 	fmt.Scanln(&input)
-// 	if input == "X" {
-// 		p.player1["X"] = []int{}
-// 		p.player2["O"] = []int{}
-// 	}
-// }
+func play(p *Power, column int, player string) bool {
+	fmt.Print("Où veux-tu jouer ? (1-7) ")
+	var input int
+	fmt.Scanln(&input)
+	column = input - 1 // Adjust for 0-based index
+	// Check if the column is valid
+	if column < 0 || column >= 7 {
+		fmt.Println("Colonne invalide. Choisissez une colonne entre 1 et 7.")
+		return false
+	}
+	// Find the lowest empty row in the column
+	for i := 5; i >= 0; i-- {
+		if p.Table[i][column] == "" {
+			p.Table[i][column] = player
+			return true
+		}
+	}
+	fmt.Println("Colonne pleine. Choisissez une autre colonne.")
+	return false
+}
 
 // NewPower returns a Power struct with the Table initialized to empty spaces.
 func NewPower() *Power {
@@ -32,15 +44,11 @@ func NewPower() *Power {
 	return p
 }
 
-func (p *Power) Game() {
-	// Game logic will be implemented here
-	if len(p.player1) == 0 {
-		fmt.Println("C'est au joueur 1 de jouer")
-	} else {
-		fmt.Println("C'est au joueur 2 de jouer")
+func tour(p *Power, currentPlayer string) string {
+	if currentPlayer == p.player1 {
+		return p.player2
 	}
-	// Continuez avec la logique du jeu
-	// Par exemple, vous pouvez demander au joueur de choisir une colonne et de placer son jeton
+	return p.player1
 }
 
 func (p *Power) Win() {

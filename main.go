@@ -25,6 +25,11 @@ func main() {
 	http.HandleFunc("/", handler)
 	fmt.Println("Server started at http://localhost:8080")
 	http.ListenAndServe(":8080", nil)
+	for {
+		tour(&Power{}, player1)
+		play(&Power{}, 0, tour(&Power{}, player1))
+		NewPower().Win()
+	}
 	// Initialize the game (this is just an example, actual game logic would be more complex)
 	// powerGame := NewPower()
 }
