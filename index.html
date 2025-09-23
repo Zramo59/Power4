@@ -19,17 +19,12 @@
 </head>
 <body>
   <h1>Power4 Web</h1>
-
   <div class="status">
     {{if .Winner}}
-        Joueur {{.Winner}} a gagné
-    {{else if .Draw}}
-        Egalité.
+      {{if eq .Winner 1}}Le joueur 1 a gagné !{{else}}Le joueur 2 a gagné !{{end}}
     {{else}}
-        Au tour du joueur {{.Turn}}
+      Tour du joueur {{.CurrentPlayer}}
     {{end}}
-  </div>
-
   <table class="board">
     <tbody>
     {{range $r, $row := .Board}}
@@ -49,7 +44,6 @@
   </table>
 
   <form class="cols" action="/play" method="post">
-    {{/* Les valeurs correspondent aux index de colonnes du backend */}}
     <button name="col" value="0">Col 1</button>
     <button name="col" value="1">Col 2</button>
     <button name="col" value="2">Col 3</button>
