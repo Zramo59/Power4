@@ -18,7 +18,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	tmpl.Execute(w, data)
 	// Afficher un message de bienvenue
-	fmt.Fprintln(w, "Bienvenue sur mon puissance 4")
+	fmt.Fprintln(w, "Sex time")
 }
 
 func main() {
