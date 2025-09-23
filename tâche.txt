@@ -1,0 +1,3 @@
+afficher la tache 
+jeton
+gestion des jetons dans la grilles

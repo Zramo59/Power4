@@ -5,8 +5,10 @@ import "fmt"
 type Power struct {
 	Table   [6][7]string
 	player1 map[string][2]int
-	player2 map[string][2]int
+	// player2 map[string][2]int
 }
+
+var table [6][7]string
 
 // func (p *Power) PlayerAffect() {
 // 	fmt.Println("Que voulez-vous comme symbole pour le joueur 1 ? (\"X/O\")")
