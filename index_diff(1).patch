@@ -1,0 +1,21 @@
+--- index.html (avant)+++ index.html (après)@@ -57,15 +57,19 @@     <div class="grid" role="grid" aria-label="Plateau 6 lignes par 7 colonnes">
+       {{/* Si .Board est fourni par le serveur Go, on l'utilise */}}
+       {{if .Board}}
+-        {{/* Lignes 6 -> 1 */}}
+         {{range $i, $row := .Board}}
+-          <div class="row-idx">{{index (slice 6 5 4 3 2 1) $i}}</div>
++          <div class="row-idx">•</div>
+           {{range $j, $cell := $row}}
+             {{if eq $cell 1}}
+               <div class="cell p1" role="gridcell" aria-label="Jeton joueur 1"></div>
+             {{else if eq $cell 2}}
+               <div class="cell p2" role="gridcell" aria-label="Jeton joueur 2"></div>
+             {{else}}
++              <div class="cell empty" role="gridcell" aria-label="Case vide"></div>
++            {{end}}
++          {{end}}
++        {{end}}
++      {{else}}
+               <div class="cell empty" role="gridcell" aria-label="Case vide"></div>
+             {{end}}
+           {{end}}
