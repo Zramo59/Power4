@@ -9,6 +9,18 @@
   <h1>Puissance 4</h1>
   <p class="subtitle"></p>
 
+  <form method="POST" style="margin-bottom: 1rem;">
+    <div class="controls">
+      <span>Jouer dans la colonne :</span>
+      <button type="submit" name="col" value="1">1</button>
+      <button type="submit" name="col" value="2">2</button>
+      <button type="submit" name="col" value="3">3</button>
+      <button type="submit" name="col" value="4">4</button>
+      <button type="submit" name="col" value="5">5</button>
+      <button type="submit" name="col" value="6">6</button>
+      <button type="submit" name="col" value="7">7</button>
+    </div>
+  </form>
 
   <div class="board-wrap" role="group" aria-label="Grille du Puissance 4">
     <div class="legend" aria-hidden="true">
@@ -17,13 +29,13 @@
       <div class="col-idx">4</div><div class="col-idx">5</div><div class="col-idx">6</div><div class="col-idx">7</div>
     </div>
     <div class="grid" role="grid" aria-label="Plateau 6 lignes par 7 colonnes">
-      {{if .Board}}
-        {{range $i, $row := .Board}}
+      {{if .Table}}
+        {{range $i, $row := .Table}}
           <div class="row-idx">•</div>
           {{range $j, $cell := $row}}
-            {{if eq $cell 1}}
+            {{if eq $cell "X"}}
               <div class="cell p1" role="gridcell" aria-label="Jeton joueur 1"></div>
-            {{else if eq $cell 2}}
+            {{else if eq $cell "O"}}
               <div class="cell p2" role="gridcell" aria-label="Jeton joueur 2"></div>
             {{else}}
               <div class="cell empty" role="gridcell" aria-label="Case vide"></div>
@@ -41,4 +53,5 @@
     </div>
     <div class="legend" aria-hidden="true">
       <div class="corner"></div>
-      <div class="col-idx">1</di
+      <div class="col-idx">1</di>
+      </div>
