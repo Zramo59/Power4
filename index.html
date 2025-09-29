@@ -11,7 +11,7 @@
 
   <div class="status">
     {{if .Win}}
-      {{if eq .Winner 1}}Le joueur 1 a gagné !{{else}}Le joueur 2 a gagné !{{end}}
+      {{if eq .Win 1}}Le joueur 1 a gagné !{{else}}Le joueur 2 a gagné !{{end}}
     {{else}}
       Tour du joueur {{.CurrentPlayer}}
     {{end}}
@@ -36,13 +36,13 @@
   </table>
 
   <form class="cols" action="/play" method="post">
-    <button name="col" value="0" {{if .Winner}}disabled{{end}}>Col 1</button>
+    <button name="col" value="0" {{if .Win}}disabled{{end}}>Col 1</button>
     <button name="col" value="1" {{if .Winner}}disabled{{end}}>Col 2</button>
     <button name="col" value="2" {{if .Winner}}disabled{{end}}>Col 3</button>
     <button name="col" value="3" {{if .Winner}}disabled{{end}}>Col 4</button>
-    <button name="col" value="4" {{if .Winner}}disabled{{end}}>Col 5</button>
-    <button name="col" value="5" {{if .Winner}}disabled{{end}}>Col 6</button>
-    <button name="col" value="6" {{if .Winner}}disabled{{end}}>Col 7</button>
+    <button name="col" value="4" {{if .Win}}disabled{{end}}>Col 5</button>
+    <button name="col" value="5" {{if .Win}}disabled{{end}}>Col 6</button>
+    <button name="col" value="6" {{if .Win}}disabled{{end}}>Col 7</button>
     <button name="col" value="reset" type="submit" aria-label="Réinitialiser la partie">↺ Réinitialiser</button>
   </form>
 
