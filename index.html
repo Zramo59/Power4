@@ -7,6 +7,7 @@
 </head>
 <body>
   <h1>Puissance 4</h1>
+
   <p class="subtitle"></p>
 
   <form method="POST" style="margin-bottom: 1rem;">
@@ -28,6 +29,7 @@
       <div class="col-idx">1</div><div class="col-idx">2</div><div class="col-idx">3</div>
       <div class="col-idx">4</div><div class="col-idx">5</div><div class="col-idx">6</div><div class="col-idx">7</div>
     </div>
+
     <div class="grid" role="grid" aria-label="Plateau 6 lignes par 7 colonnes">
       {{if .Table}}
         {{range $i, $row := .Table}}
@@ -51,7 +53,12 @@
         <div class="row-idx">•</div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div><div class="cell empty"></div>
       {{end}}
     </div>
+
     <div class="legend" aria-hidden="true">
       <div class="corner"></div>
-      <div class="col-idx">1</di>
-      </div>
+      <div class="col-idx">1</div><div class="col-idx">2</div><div class="col-idx">3</div>
+      <div class="col-idx">4</div><div class="col-idx">5</div><div class="col-idx">6</div><div class="col-idx">7</div>
+    </div>
+  </div>
+</body>
+</html>
