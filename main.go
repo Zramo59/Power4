@@ -1,33 +1,33 @@
 package main
 
 import (
-	"fmt"
-	"html/template"
+	"log"
 	"net/http"
+	"text/template"
 )
 
-var tmpl = template.Must(template.ParseFiles("index.html"))
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	tmpl.Execute(w, nil)
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Serveur démarré sur http://localhost:8080")
-	//
-	http.ListenAndServe(":8080", nil)
-	p := NewPower()
-	Starter(p.Player)
-	p.PrintBoard()
-	for {
-		if Play(p) {
-			if p.Win() {
-				break
-			} else if p.IsDraw() {
-				fmt.Println("Match nul!")
-				break
-			}
+	// Créer une nouvelle instance du jeu
+	power := NewPower()
+
+	// Parser le template HTML
+	tmpl := template.Must(template.ParseFiles("index.html"))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// Passer la structure Power au template
+		data := struct {
+			Power *Power
+		}{
+			Power: power,
 		}
-	}
+
+		err := tmpl.Execute(w, data)
+		if err != nil {
+			log.Printf("Erreur lors de l'exécution du template: %v", err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
+
+	log.Println("Serveur démarré sur http://localhost:8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
