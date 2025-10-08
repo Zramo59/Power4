@@ -112,9 +112,27 @@
             {{end}}
         </div>
         <div class="info">
-            <!-- Fixed currentPlayer to CurrentPlayer with capital C -->
             <p>Joueur actuel: {{.Power.CurrentPlayer}}</p>
         </div>
+        <div class="Game">
+            {{if .Power.Winner}}
+                <div class="info">
+                    <h2>Le joueur {{.Power.Winner}} a gagné !</h2>
+                </div>
+            {{else if .Power.IsDraw}}
+                <div class="info">
+                    <h2>Match nul !</h2>
+                </div>
+            {{end}}
+        </div>
+        <form class="cols" action="/play" method="post">
+            {{range $i := .Cols}}
+                <button name="col" value="{{$i}}" id="col-{{$i}}" type="submit" aria-label="Jouer dans la colonne {{$i}}">↓</button>
+            {{end}}
+        </form>
+        <form action="/reset" method="post">
+            <button type="submit" aria-label="Réinitialiser le jeu">Réinitialiser le jeu</button>
+        </form>
     </div>
 </body>
 </html>

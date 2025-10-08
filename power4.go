@@ -6,6 +6,7 @@ type Power struct {
 	Table         [6][7]string
 	Player        [2]string
 	CurrentPlayer string
+	Winner        string
 }
 
 var Player = [2]string{"X", "O"}
@@ -18,11 +19,8 @@ func Starter(Player [2]string) {
 	}
 }
 
-func Play(p *Power) bool {
+func Play(p *Power, column int) bool {
 	fmt.Print("Où veux-tu jouer ? (1-7) ")
-	var input int
-	fmt.Scanln(&input)
-	column := input - 1
 
 	if column < 0 || column >= 7 {
 		fmt.Println("Colonne invalide. Choisissez une colonne entre 1 et 7.")
@@ -76,34 +74,37 @@ func (p *Power) PrintBoard() {
 	fmt.Println()
 }
 
-func (p *Power) Win() bool {
+func (p *Power) Win() {
 	for i := 0; i < 6; i++ {
 		for j := 0; j < 7; j++ {
 			if p.Table[i][j] != "" {
 				// Vérifier horizontal
 				if j < 4 && p.Table[i][j] == p.Table[i][j+1] && p.Table[i][j] == p.Table[i][j+2] && p.Table[i][j] == p.Table[i][j+3] {
 					fmt.Println("Joueur", p.Table[i][j], "gagne!")
-					return true
+					p.Winner = p.Table[i][j]
+					return
 				}
 				// Vérifier vertical
 				if i < 3 && p.Table[i][j] == p.Table[i+1][j] && p.Table[i][j] == p.Table[i+2][j] && p.Table[i][j] == p.Table[i+3][j] {
 					fmt.Println("Joueur", p.Table[i][j], "gagne!")
-					return true
+					p.Winner = p.Table[i][j]
+					return
 				}
 				// Vérifier diagonale (bas-gauche vers haut-droite)
 				if i < 3 && j < 4 && p.Table[i][j] == p.Table[i+1][j+1] && p.Table[i][j] == p.Table[i+2][j+2] && p.Table[i][j] == p.Table[i+3][j+3] {
 					fmt.Println("Joueur", p.Table[i][j], "gagne!")
-					return true
+					p.Winner = p.Table[i][j]
+					return
 				}
 				// Vérifier diagonale (haut-gauche vers bas-droite)
 				if i >= 3 && j < 4 && p.Table[i][j] == p.Table[i-1][j+1] && p.Table[i][j] == p.Table[i-2][j+2] && p.Table[i][j] == p.Table[i-3][j+3] {
 					fmt.Println("Joueur", p.Table[i][j], "gagne!")
-					return true
+					p.Winner = p.Table[i][j]
+					return
 				}
 			}
 		}
 	}
-	return false
 }
 
 func (p *Power) IsDraw() bool {
