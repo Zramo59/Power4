@@ -97,6 +97,12 @@
                 padding: 15px;
             }
         }
+        button { 
+            width: 88px;
+            height: 50px;
+            background-color: white;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -127,7 +133,7 @@
         </div>
         <form class="cols" action="/play" method="post">
             {{range $i := .Cols}}
-                <button name="col" value="{{$i}}" id="col-{{$i}}" type="submit" aria-label="Jouer dans la colonne {{$i}}">↓</button>
+            <button name="col" value="{{$i}}" id="col-{{$i}}" type="submit" aria-label="Jouer dans la colonne {{$i}}">colonne {{$i}}</button>
             {{end}}
         </form>
         <form action="/reset" method="post">
