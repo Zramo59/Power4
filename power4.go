@@ -3,13 +3,45 @@ package main
 import "fmt"
 
 type Power struct {
-	Table         [6][7]string
+	Table         [][]string
 	Player        [2]string
 	CurrentPlayer string
 	Winner        string
 }
 
 var Player = [2]string{"X", "O"}
+
+func Difficulty(p *Power) {
+	var level string
+	fmt.Println("Niveaux de difficulté disponibles:")
+	fmt.Println("1. Facile")
+	fmt.Println("2. Normal")
+	fmt.Println("3. Hard")
+	fmt.Println("Choisissez le niveau de difficulté:")
+	fmt.Scanln(&level)
+	switch level {
+	case "Facile", "1":
+		fmt.Println("Niveau Facile sélectionné.")
+		p.Table = make([][]string, 6)
+		for i := range p.Table {
+			p.Table[i] = make([]string, 7)
+		}
+	case "Normal", "2":
+		fmt.Println("Niveau Normal sélectionné.")
+		p.Table = make([][]string, 6)
+		for i := range p.Table {
+			p.Table[i] = make([]string, 9)
+		}
+	case "Hard", "3":
+		fmt.Println("Niveau Hard sélectionné.")
+		p.Table = make([][]string, 7)
+		for i := range p.Table {
+			p.Table[i] = make([]string, 8)
+		}
+	default:
+		fmt.Println("Niveau invalide. Sélection par défaut: Normal.")
+	}
+}
 
 func Starter(Player [2]string) {
 	fmt.Println("Bienvenue dans le jeu Puissance 4!")
@@ -20,9 +52,7 @@ func Starter(Player [2]string) {
 }
 
 func Play(p *Power, column int) bool {
-	fmt.Print("Où veux-tu jouer ? (1-7) ")
-
-	if column < 0 || column >= 7 {
+	if column < 0 || column >= len(p.Table[0]) {
 		fmt.Println("Colonne invalide. Choisissez une colonne entre 1 et 7.")
 		return false
 	}

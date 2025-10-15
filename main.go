@@ -31,6 +31,14 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/difficulty", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			// Changer la difficulté du jeu
+			Difficulty(power)
+		}
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	})
+
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			colStr := r.FormValue("col")
