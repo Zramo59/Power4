@@ -1,6 +1,0 @@
-afficher la grille
-refresh de la page
-jeton
-gestion des jetons dans la grilles
-bonus 
-choix perso couleurs
