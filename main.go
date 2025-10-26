@@ -8,14 +8,10 @@ import (
 )
 
 func main() {
-	// Créer une nouvelle instance du jeu
 	power := NewPower()
-
-	// Parser le template HTML
 	tmpl := template.Must(template.ParseFiles("index.html"))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Passer la structure Power et Cols au template
 		data := struct {
 			Power *Power
 			Cols  []int
@@ -24,8 +20,7 @@ func main() {
 			Cols:  []int{0, 1, 2, 3, 4, 5, 6},
 		}
 
-		err := tmpl.Execute(w, data)
-		if err != nil {
+		if err := tmpl.Execute(w, data); err != nil {
 			log.Printf("Erreur lors de l'exécution du template: %v", err)
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
@@ -33,7 +28,6 @@ func main() {
 
 	http.HandleFunc("/difficulty", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
-			// Changer la difficulté du jeu
 			Difficulty(power)
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -42,11 +36,13 @@ func main() {
 	http.HandleFunc("/play", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			colStr := r.FormValue("col")
-			// Jouer dans la colonne spécifiée
-			col, err := strconv.Atoi(colStr)
-			if err == nil {
-				Play(power, col)
-				power.Win()
+			if col, err := strconv.Atoi(colStr); err == nil {
+				if Play(power, col) {
+					power.Win()
+					if power.Winner == "" && !power.IsDraw() {
+						power.switchPlayer()
+					}
+				}
 			}
 		}
 		http.Redirect(w, r, "/", http.StatusSeeOther)
@@ -58,8 +54,6 @@ func main() {
 	}))
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("."))))
-
-	// Démarrer le serveur web
 
 	log.Println("Serveur démarré sur http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
