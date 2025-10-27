@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 type Power struct {
-	Table         [6][7]string
+	Table         [][]string
 	Player        [2]string
 	CurrentPlayer string
 	Winner        string

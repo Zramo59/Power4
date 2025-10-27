@@ -49,6 +49,7 @@ func main() {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 	}))
 
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	// Démarrer le serveur web
 
 	log.Println("Serveur démarré sur http://localhost:8080")
