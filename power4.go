@@ -54,11 +54,10 @@ func Starter(Player [2]string) {
 
 func Play(p *Power, column int) bool {
 	if column < 0 || column >= len(p.Table[0]) {
-		fmt.Println("Colonne invalide. Choisissez une colonne entre 1 et 7.")
+		fmt.Println("Colonne invalide. Choisissez une colonne entre 0 et", len(p.Table[0])-1)
 		return false
 	}
-
-	for i := 5; i >= 0; i-- {
+	for i := len(p.Table) - 1; i >= 0; i-- {
 		if p.Table[i][column] == "" {
 			p.Table[i][column] = p.CurrentPlayer
 			p.switchPlayer()
@@ -75,10 +74,9 @@ func NewPower() *Power {
 	p := &Power{}
 	p.Player = Player
 	p.CurrentPlayer = Player[0]
-	for i := 0; i < 6; i++ {
-		for j := 0; j < 7; j++ {
-			p.Table[i][j] = ""
-		}
+	p.Table = make([][]string, 6)
+	for i := range p.Table {
+		p.Table[i] = make([]string, 7)
 	}
 	return p
 }
