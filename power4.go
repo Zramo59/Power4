@@ -11,39 +11,6 @@ type Power struct {
 
 var Player = [2]string{"X", "O"}
 
-// func Difficulty(p *Power) {
-// 	var level string
-// 	fmt.Println("Niveaux de difficulté disponibles:")
-// 	fmt.Println("1. Facile")
-// 	fmt.Println("2. Normal")
-// 	fmt.Println("3. Hard")
-// 	fmt.Println("Choisissez le niveau de difficulté:")
-// 	fmt.Scanln(&level)
-// 	switch level {
-// 	case "Facile", "1":
-// 		fmt.Println("Niveau Facile sélectionné.")
-// 		tableSize := 6
-// 		p.Table = make([][]string, tableSize)
-// 		for i := range p.Table {
-// 			p.Table[i] = make([]string, tableSize+1)
-// 		}
-// 	case "Normal", "2":
-// 		fmt.Println("Niveau Normal sélectionné.")
-// 		p.Table = make([][]string, 6)
-// 		for i := range p.Table {
-// 			p.Table[i] = make([]string, 9)
-// 		}
-// 	case "Hard", "3":
-// 		fmt.Println("Niveau Hard sélectionné.")
-// 		p.Table = make([][]string, 7)
-// 		for i := range p.Table {
-// 			p.Table[i] = make([]string, 8)
-// 		}
-// 	default:
-// 		fmt.Println("Niveau invalide. Sélection par défaut: Normal.")
-// 	}
-// }
-
 func Starter(Player [2]string) {
 	fmt.Println("Bienvenue dans le jeu Puissance 4!")
 	fmt.Println("Joueurs:")
