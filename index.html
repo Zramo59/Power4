@@ -37,7 +37,7 @@
             <button name="col" value="{{$i}}" id="col-{{$i}}" type="submit" aria-label="Jouer dans la colonne {{$i}}">colonne {{$i}}</button>
             {{end}}
         </form>
-        <form action="/reset" method="post">
+        <form action="/reset" method="post" class="reset-form">
             <button type="submit" aria-label="Réinitialiser le jeu">Réinitialiser le jeu</button>
         </form>
     </div>
